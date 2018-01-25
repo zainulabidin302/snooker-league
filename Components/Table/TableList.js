@@ -59,6 +59,7 @@ class TableList extends React.Component {
   }
   render() {
     let tables = this.props.store.tableStore.getTables
+    
     let rows = tables.map((table, idx) => {
       
       let addPlayerForm = null;

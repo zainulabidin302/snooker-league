@@ -38,11 +38,12 @@ class AddPlayersForMatch extends React.Component {
   }
  
   createNewMatch() {
-    let table_id = this.props.table.id;
-    this.match.table_id = table_id;
+    this.match.table = this.props.table;
+    this.match.club_id = this.props.store.currentUser.user.uid;
     this.match.status = 'PLAYING';
+    this.match.start_time = Math.floor(Date.now())
     this.props.store.matchStore.addMatch(this.match);
-    this.props.onMatchCreated(table_id)
+    this.props.onMatchCreated(this.props.table.id)
   }
 
   render() {

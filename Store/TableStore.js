@@ -15,31 +15,38 @@ export default class TableStore {
   }
 
   fetch() {
+    
     this.tables.replace([]);
-    let ref = firebase.database().ref('tables')
-    ref.once('value', (snapShot) => {
-      _.each(snapShot.toJSON(), (item, key) => {
-        this.tables.push(new Table({
-          title: item.title,
-          status: item.status,
-          id: key
-        }));
-      })
+    let ref = firebase.database().ref('clubs/' + this.rootStore.currentUser.user.uid + '/tables')
 
+    ref.orderByChild('title').on('value', (snapShot) => {
+      snapShot.forEach((child) => {
+        let item = child.val()
+        this.tables.push(new Table({
+          ...child.toJSON(),
+          id: child.key
+        }));
+      });
     }, (err) => {
-      console.log('could not fetch!')
+      console.log('could not fetch!', error)
     })
   }
 
   @computed get getTables() {
     let matches = this.rootStore.matchStore.getPlaying;
+
     let curated_list = this.tables.map(table => {
-       let match = _.find(matches, {table_id: table.id, status: 'PLAYING'});
        
-       if (!match) {
-         return table;
+      let match = matches.filter((_match) => {
+      
+       return _match.table.id == table.id && _match.status == 'PLAYING'
+      });
+
+       if (match.length < 1) {
+         return {...table};
        }
-       return {...table, Match: match, status: match.status}
+       
+       return {...table, Match: match[0], status: match[0].status}
     })
 
     return curated_list;

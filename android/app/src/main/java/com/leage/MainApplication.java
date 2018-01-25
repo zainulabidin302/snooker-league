@@ -3,6 +3,8 @@ package com.leage;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 
 
 import com.facebook.CallbackManager;
@@ -23,6 +25,7 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class MainApplication extends Application implements ReactApplication {
   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
@@ -39,11 +42,15 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactMaterialKitPackage(),
+            new ReactMaterialKitPackage(),
             new FBSDKPackage(mCallbackManager),
             new RNFirebasePackage(),
             new RNFirebaseAuthPackage() ,
             new RNFirebaseStoragePackage(),
             new RNFirebaseDatabasePackage()
+          
+
 
       );
     }

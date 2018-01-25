@@ -163,7 +163,7 @@ export default class Login extends React.Component {
                 placeholderTextColor="gray"  onChangeText={(text) => this.setState({password: text}) } />
             </View>
           
-          <Button onPress={this.loginWithEmail.bind(this) } title="Login Email" ></Button>
+          <Button onPress={this.loginWithEmail.bind(this) } title="Login" ></Button>
         </View>
 
       </ScrollView>

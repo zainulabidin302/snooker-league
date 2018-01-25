@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Image, Alert, DrawerLayoutAndroid} from 'react-native';
+import { ScrollView, StyleSheet, Text, View, TextInput, Button, Image, Alert, DrawerLayoutAndroid} from 'react-native';
 import {observer, inject} from 'mobx-react';
 import { observable } from 'mobx'
 import TableList from '../Table/TableList';
@@ -7,6 +7,7 @@ import TouchableRow from '../DumbComponents/TouchableRow';
 import HeadingRow from '../DumbComponents/HeadingRow'
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import firebase from 'react-native-firebase';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 @inject('store') @observer
 class Home extends React.Component {
@@ -20,7 +21,7 @@ class Home extends React.Component {
   drawerStatus = false;
 
   toggleSidebar() {
-    this._drawer.openDrawer()    
+    this._drawer.openDrawer();
   }
 
   render() {
@@ -62,8 +63,9 @@ class Home extends React.Component {
                   <Text style={{  padding: 5}}>{user.displayName} </Text>
                   <Image source={{uri: user.photoURL}} style={{ width: 50, height: 50, margin: 5 }} />
                 </View>
-                <TableList  />
-              
+                <KeyboardAwareScrollView style={{height: 900}}>
+                  <TableList  />
+                </KeyboardAwareScrollView>
           </View>
       </DrawerLayoutAndroid>
     );
@@ -75,7 +77,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center'
   },
-  
+  poolGrid: {
+
+  },
   tableView: {
     height: 60,
     width: '100%',

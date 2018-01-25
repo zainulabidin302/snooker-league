@@ -41,14 +41,12 @@ addMore() {
     return (
     <View style={style.container}>
       <HeadingRow>Create a Player:</HeadingRow>
-        <Row><Text>Phone Number:</Text></Row>
-        <TextInput value={this.player.phone} onChangeText={(text) => this.player.phone = text } ></TextInput>
+        <TextInput placeholder="Enter phone number (e.g 923009996661)" value={this.player.phone} onChangeText={(text) => this.player.phone = text } ></TextInput>
 
-        <Row><Text>Name:</Text></Row>
-        <TextInput value={this.player.name} onChangeText={(text) => this.player.name = text } ></TextInput>
+        <TextInput placeholder="Enter Username" value={this.player.name} onChangeText={(text) => this.player.name = text } ></TextInput>
 
-        <Row><Text>Date of Birth (yyyy-mm-dd):</Text></Row>
-        <TextInput value={this.player.dob} onChangeText={(text) => this.player.dob = text } ></TextInput>
+        {/* <Row><Text>Date of Birth (yyyy-mm-dd):</Text></Row>
+        <TextInput value={this.player.dob} onChangeText={(text) => this.player.dob = text } ></TextInput> */}
         <View style={{margin: 10}} >
             <Button  title="Add player" onPress={this.addPlayer.bind(this) }></Button>
         </View>

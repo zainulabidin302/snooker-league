@@ -8,11 +8,12 @@ export default class Table {
   @observable status;
 
   constructor(data) {
-      console.log(data)
+      
       this.title = data.title || null
       this.status = data.status || null
       this.id = data.id || null
       this.Match = data.Match || null
-  }
+      this.price = data.price || null
+    }
 
 }

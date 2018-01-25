@@ -8,8 +8,6 @@ import { Provider } from 'mobx-react';
 import firebase from 'react-native-firebase';
 import AddPlayer from './Components/AddPlayer/AddPlayer'
 import MatchHistory from './Components/MatchHistory/MatchHistory'
-
-
 // firebase.auth().createUserWithEmailAndPassword('zain302@hotmail.com', '123123123').catch((e) => {
 //   console.log(e)
 // })
