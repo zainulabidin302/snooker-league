@@ -1,115 +1,71 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image, Alert, DrawerLayoutAndroid} from 'react-native';
+import {observer, inject} from 'mobx-react';
+import { observable } from 'mobx'
+import TableList from '../Table/TableList';
+import TouchableRow from '../DumbComponents/TouchableRow';
+import HeadingRow from '../DumbComponents/HeadingRow'
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
+import firebase from 'react-native-firebase';
 
-
-
-export default class Home extends React.Component {
-  
+@inject('store') @observer
+class Home extends React.Component {
   constructor(props) {
-    super(props)
-
-    this.state = {
-      tables: [{
-        id: 1,
-        title: 'One',
-        status: 'UNAVAILABLE'
-      }, {
-        id: 2,
-        title: 'Two',
-        status: 'PLAYING',
-        players: [{
-          name: 'Saad khan',
-          id  : 13234,
-          mobile: '03009597001'
-        },
-        {
-          name: 'Hassan ALi',
-          id  : 13234,
-          mobile: '03009597002'
-        }]
-      }, {
-        id: 3,
-        title: 'Three',
-        status: 'FREE'
-      }]
-    }  
-
+    super(props);
   }
-  status = ['UNAVAILABLE', 'PLAYING', 'FREE'];
+
   static navigationOptions = {
     title: 'Home'
-  }    
-
-  tableAction(table) {
-    console.log(table)
-    switch(table.status) {
-      case 'UNAVAILABLE':
-        Alert.alert(
-          `Table ${table.title}`,
-          'The table is currently unavailable for playing.',
-          [{text: 'OK', onPress: () => console.log('OK Pressed')},]
-        )
-      break;
-
-      case 'PLAYING':
-        
-        players_text = table.players.map((player) => player.name ).join(' vs ')
-        Alert.alert(
-          `Table ${table.title}`,
-          `${players_text}`,
-          [{text: 'End Match', onPress: () => {
-
-            tableId = this.state.tables.findIndex((_table) => table.id == _table.id)
-
-            this.setState(prevState => {
-              prevState.tables[tableId].status = 'FREE'
-              return prevState;
-            })
-
-
-          }},]
-        )
-        
-       
-      break;
-
-      case 'FREE':
-
-        Alert.alert(
-          `Table ${table.title}`,
-          `Create a match`,
-          [{text: 'Add Players', onPress: () => { this.props.navigation.navigate('AddPlayersForMatchPage', {table: table}) }},
-          {text: 'Cancel', onPress: () => console.log('OK Pressed')},]
-        )
-      break;
-
-    }
   }
+  drawerStatus = false;
+
+  toggleSidebar() {
+    this._drawer.openDrawer()    
+  }
+
   render() {
+    const { user } = this.props.store.currentUser;
     const { navigate } = this.props.navigation;
 
-    
-   
+    var navigationView = (
+      <View style={{flex: 1, backgroundColor: '#fff'}}>
+        <HeadingRow><Text>Snooker Star</Text></HeadingRow>
+        <TouchableRow onPress={ () => navigate('AddPlayerPage') }>
+          <Text>Add Player</Text>
+        </TouchableRow>
+        <TouchableRow onPress={ () => navigate('MatchHistoryPage') }>
+          <Text>Match History</Text>
+        </TouchableRow>
+
+        <TouchableRow onPress={ () => {
+          firebase.auth().signOut().then(() => {
+            navigate('LoginPage');
+          });
+          } }>
+          <Text >Logout</Text>
+        </TouchableRow>
+      </View>
+    );
 
     return (
-      <View style={styles.poolGrid}>
-        {
-          this.state.tables.map((table) => {
-            
-            let vs_txt = '';
-            if (table.status == 'PLAYING') {
-              vs_txt = <Text>{ table.players.map((player) => player.name ).join(' vs ') }</Text>
-            }
-
-            return <View key={table.id} style={styles.tableView}>
+      <DrawerLayoutAndroid
+        drawerWidth={300}
+        ref={(ref) => this._drawer = ref}
+        drawerPosition={DrawerLayoutAndroid.positions.Left}
+        renderNavigationView={() => navigationView}>
+          <View style={styles.poolGrid}>
+          
+                <View style={{backgroundColor: '#ccc', display: 'flex', 
+                    flexDirection: 'row', justifyContent: 'space-between',  height: 100}}>
+                  <Button title="Settings" onPress={this.toggleSidebar.bind(this)} ></Button>
+                  <Text style={{  padding: 10, fontSize: 20 }}>Snooker Star</Text>
+                  <Text style={{  padding: 5}}>{user.displayName} </Text>
+                  <Image source={{uri: user.photoURL}} style={{ width: 50, height: 50, margin: 5 }} />
+                </View>
+                <TableList  />
               
-              <Text onPress={() => {this.tableAction(table)} }  style={styles.tableText} > {table.title} - {vs_txt} - {table.status} </Text>
-              
-              
-            </View>
-          })
-        }        
-      </View>
+          </View>
+      </DrawerLayoutAndroid>
     );
   }
 }
@@ -134,3 +90,5 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
 });
+
+export default Home;

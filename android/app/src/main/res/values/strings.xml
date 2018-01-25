@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Leage</string>
+    <string name="facebook_app_id">354508695028623</string>
+    <string name="fb_login_protocol_scheme">fb354508695028623</string>
+</resources>

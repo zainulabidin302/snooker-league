@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "731319685710",
+    "firebase_url": "https://snooker-star.firebaseio.com",
+    "project_id": "snooker-star",
+    "storage_bucket": "snooker-star.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731319685710:android:28d8dccbe9240eb1",
+        "android_client_info": {
+          "package_name": "com.league"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731319685710-2vgv38c89lclij2qd43nvl8kmp3abaef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr5qi2VCcSf75zH6eIUkLT2vT0rCalflQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731319685710:android:bc3cf09a16431cd8",
+        "android_client_info": {
+          "package_name": "com.leage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731319685710-2vgv38c89lclij2qd43nvl8kmp3abaef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr5qi2VCcSf75zH6eIUkLT2vT0rCalflQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
