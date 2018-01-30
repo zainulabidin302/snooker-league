@@ -19,16 +19,20 @@ export default class PlayerStore {
     this.players = observable([]);
     ref.once('value', (snapShot) => {
       _.each(snapShot.toJSON(), (item, key) => {
-        this.players.push(new Player({
-          name: item.name,
-          age: item.age,
-          phone: item.phone,
-          id: key
-        }));
+        this.players.push(new Player({...item, id: key}));
       })
 
     }, (err) => {
       console.log('could not fetch players', err)
+    })
+  }
+
+  
+  addMatchToPlayer(player, match) {
+    let ref = firebase.database().ref('players/' + player.id);
+    console.log((player.matches && player.matches.concat(match)) || [match])
+    ref.update({
+      matches: (player.matches && player.matches.concat(match)) || [match]
     })
   }
 

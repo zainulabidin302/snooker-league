@@ -37,7 +37,7 @@ export default class Login extends React.Component {
       email: 'zain302@hotmail.com',
       password: '123123123'
     }
-
+    this.loginWithEmail()
   }
   // async login() {
   //   let user = await this.loggedIn();
@@ -148,7 +148,6 @@ export default class Login extends React.Component {
      
     return (
       <ScrollView style={{width: '100%', height: 800, }}>
-
           <View style={{margin: 30, marginTop: 100}}>
             <Text style={{textAlign: 'center', fontSize: 64}}>Snooker Star</Text>
           </View>

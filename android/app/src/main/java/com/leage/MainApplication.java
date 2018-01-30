@@ -3,8 +3,6 @@ package com.leage;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 
 
 import com.facebook.CallbackManager;
@@ -42,8 +40,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReactMaterialKitPackage(),
-            new ReactMaterialKitPackage(),
             new FBSDKPackage(mCallbackManager),
             new RNFirebasePackage(),
             new RNFirebaseAuthPackage() ,
